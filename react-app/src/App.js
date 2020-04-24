@@ -9,7 +9,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { ApolloProvider } from 'react-apollo';
 
 const wsLink = new WebSocketLink({
-  uri: "wss://eu1.prisma.sh/calinzapan-bbfab7/database/dev",
+  uri: "wss://eu1.prisma.sh/andluca-62f1a0/database/dev",
   options: {
     reconnect: true
   }

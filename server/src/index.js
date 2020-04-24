@@ -9,7 +9,7 @@ const expiresIn = '1 day'
 const resolvers = {
   Query: {
     users(parent, args, ctx, info) {
-      console.log(info);
+      console.log('users -> info', info);
       return ctx.db.query.users({}, info);
     }
   },
@@ -30,10 +30,10 @@ const resolvers = {
     async loginUser(parent, { email, password }, ctx, info) {
       const user = await ctx.db.query.user({ where: { email } });
       if (!user) throw new Error('No User Found');
-  
+
       const isValid = await bcrypt.compare(password, user.password);
       if (!isValid) throw new Error('Wrong Password');
-  
+
       const authPayload = {
         user: user,
         token: jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET, { expiresIn })
@@ -49,7 +49,7 @@ const server = new GraphQLServer({
     ...req,
     db: new Prisma({
       typeDefs: 'src/generated/prisma.graphql',
-      endpoint: 'https://eu1.prisma.sh/calinzapan-bbfab7/database/dev',
+      endpoint: 'https://eu1.prisma.sh/andluca-62f1a0/database/dev',
       secret: 'mysecret123',
       debug: true,
     }),
